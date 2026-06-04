@@ -1,13 +1,18 @@
 #pragma once
-#include "point.hpp" // pulls in <iostream> transitively
+
+//Refactor shape.hpp to use forward declaration
+
+class Point;    // Forward declaration — much lighter than #include "point.hpp"
 
 class  Shape{
     private:
-        Point m_center; // value member — needs full type
-        
-    public:
-        Shape(const Point& center):m_center(center) {}
+    // Can't have `Point m_center;` because we only forward-declared it (Compiler needs size)
+    // But we CAN have a pointer:
+    Point* m_center;  // Wait — this requires manual memory management
 
-        const Point& getCenter() const { return m_center; }
-        void setCenter(const Point& p) { m_center = p; }
+    public:
+    Shape(const Point& center); //takes by reference - only needs forward decl
+
+    const Point& getCenter() const; //returns by reference - only needs forward decl
+    void setCenter (const Point& p);
 };
