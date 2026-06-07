@@ -25,6 +25,8 @@ void demoHeap()
     Tracker stackObj("stack");
     Tracker* heapObj = new Tracker("heap");
 
+    delete heapObj; //manual cleanup
+
     std::cout << "demoHeap ends\n";
     // stackObj destroyed automatically here
     // heapObj NOT destroyed — leaked!
